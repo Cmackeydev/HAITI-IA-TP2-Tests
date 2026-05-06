@@ -16,8 +16,7 @@ public class Test1 {
 .modelName("gemini-3-flash-preview")
 .build();
 // Pose une question au modèle
-String reponse =
-modele.chat("Traduis 'bonjour' en anglais");
+String reponse =modele.chat("TQuel est mon nom");
 // Affiche la réponse du modèle (hello)
 System.out.println(reponse);
 }

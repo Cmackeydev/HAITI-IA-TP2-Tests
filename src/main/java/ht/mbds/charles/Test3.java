@@ -7,7 +7,7 @@ import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.model.input.Prompt;
 import dev.langchain4j.model.input.PromptTemplate;
 
-public class Test1 {
+public class Test3 {
     public static void main(String[] args) {
         String llmKey = System.getenv("GEMINI_KEY");
     if (llmKey == null) {

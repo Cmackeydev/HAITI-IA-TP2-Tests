@@ -19,8 +19,14 @@ public class Test2 {
 .modelName("gemini-3-flash-preview")
 .build();
 // Pose une question au modèle
-ChatResponse reponse =modele.chat( UserMessage.from("Quel est ton nom?"));
+ChatResponse reponse =modele.chat( UserMessage.from("Quel est mon nom?"));
 // Affiche la réponse du modèle (hello)
 System.out.println(reponse.aiMessage().text());
+double cout_entrant = reponse.tokenUsage().inputTokenCount()*0.5/1000000;
+double cout_sortant = reponse.tokenUsage().outputTokenCount()*3.0/1000000;
+System.out.println("Coût de tokens en entrée  : " + cout_entrant + " $");
+System.out.println("Coût de tokens à la sortie : " + cout_sortant + " $" );
+System.out.println("Une requête environ " + Math.ceil(1/(cout_entrant + cout_sortant)) + " fois plus grande couterait 1 $");
 }
+
 }

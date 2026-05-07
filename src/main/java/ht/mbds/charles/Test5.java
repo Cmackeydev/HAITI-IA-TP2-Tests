@@ -24,7 +24,7 @@ public class Test5 {
   }
 
   public static void main(String[] args) {
-    String llmKey = ...;
+    String llmKey = System.getenv("GEMINI_KEY");
     if (llmKey == null) {
       System.out.println("La variable d'environnement GEMINI_KEY n'est pas définie.");
       return;
@@ -33,7 +33,10 @@ public class Test5 {
     // Mettre une température qui ne dépasse pas 0,3.
     // Le RAG sert à mieux contrôler l'exactitude des informations données par le LLM
     // et il est donc logique de diminuer la température.
-    ChatModel model = ...;
+    ChatModel model = GoogleAiGeminiChatModel.builder()
+.apiKey(llmKey)
+.modelName("gemini-3-flash-preview").temperature(0.25)
+.build();
 
     // Chargement du document, sous la forme d'embeddings, dans une base vectorielle en mémoire
     String nomDocument = "infos.txt";
@@ -54,7 +57,7 @@ public class Test5 {
             .build();
 
     // Le LLM va utiliser l'information du fichier infos.txt pour répondre à la question.
-    String question = "Comment s'appelle le chat de Pierre ?"
+    String question = "Comment s'appelle le chat de Pierre ?";
     // L'assistant recherche dans la base vectorielle les informations les plus pertinentes
     // pour répondre à la question, en comparant les embeddings de la base et celui de la question.
     // Ces informations sont ajoutées à la question et le tout est envoyé au LLM.

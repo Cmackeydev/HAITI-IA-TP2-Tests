@@ -1,11 +1,14 @@
 package ht.mbds.charles;
 
-import java.util.Map;
+import java.time.Duration;
 
-import dev.langchain4j.model.chat.ChatModel;
-import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
-import dev.langchain4j.model.input.Prompt;
-import dev.langchain4j.model.input.PromptTemplate;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.data.embedding.Embedding;
+import dev.langchain4j.model.googleai.GoogleAiEmbeddingModel;
+import dev.langchain4j.model.googleai.GoogleAiEmbeddingModel.TaskType;
+import dev.langchain4j.model.output.Response;
+import dev.langchain4j.store.embedding.CosineSimilarity;
+
 
 public class Test4 {
     public static void main(String[] args) {
@@ -15,11 +18,13 @@ public class Test4 {
       return;
     }
 
-    ChatModel modele = GoogleAiGeminiChatModel.builder()
-.apiKey(llmKey)
-.modelName("gemini-3-flash-preview")
-.build();
+EmbeddingModel embeddingModel = GoogleAiEmbeddingModel.builder().apiKey(llmKey).modelName("gemini-embedding-2").taskType(TaskType.SEMANTIC_SIMILARITY).outputDimensionality(300).timeout(Duration.ofMillis(5000)).build();
 
+Response<Embedding> embedding1 = embeddingModel.embed("Je suis la première phrase");
+Response<Embedding> embedding2 = embeddingModel.embed("Je suis la deuxième phrase");
+
+double similarite = CosineSimilarity.between(embedding2.content(),embedding1.content());
+System.out.println("Similarité entre les deux phrases : " + similarite);
 
 }
 }

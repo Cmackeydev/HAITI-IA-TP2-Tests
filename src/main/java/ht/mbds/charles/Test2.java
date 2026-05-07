@@ -2,7 +2,6 @@ package ht.mbds.charles;
 
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatModel;
-import dev.langchain4j.model.chat.request.ChatRequest;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 

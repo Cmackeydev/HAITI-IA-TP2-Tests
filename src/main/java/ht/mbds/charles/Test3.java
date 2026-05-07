@@ -20,9 +20,9 @@ public class Test3 {
 .modelName("gemini-3-flash-preview")
 .build();
 
-PromptTemplate traducteur = PromptTemplate.from("Traduire le texte suivant en anglais : {texte}");
+PromptTemplate traducteur = PromptTemplate.from("Traduire le texte suivant en anglais : {{texte}}");
 Prompt promptTraduction = traducteur.apply(Map.of("texte","Bonjour"));
-String reponse =modele.chat(promptTraduction.toUserMessage()).toString();
+String reponse =modele.chat(promptTraduction.toUserMessage()).aiMessage().text();
 // Affiche la réponse du modèle (hello)
 System.out.println(reponse);
 }

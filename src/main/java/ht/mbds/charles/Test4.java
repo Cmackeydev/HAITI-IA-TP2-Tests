@@ -21,7 +21,7 @@ public class Test4 {
 EmbeddingModel embeddingModel = GoogleAiEmbeddingModel.builder().apiKey(llmKey).modelName("gemini-embedding-2").taskType(TaskType.SEMANTIC_SIMILARITY).outputDimensionality(300).timeout(Duration.ofMillis(5000)).build();
 
 Response<Embedding> embedding1 = embeddingModel.embed("Je suis la première phrase");
-Response<Embedding> embedding2 = embeddingModel.embed("Je suis la deuxième phrase");
+Response<Embedding> embedding2 = embeddingModel.embed("Je suis une phrase similaire à la première");
 
 double similarite = CosineSimilarity.between(embedding2.content(),embedding1.content());
 System.out.println("Similarité entre les deux phrases : " + similarite);

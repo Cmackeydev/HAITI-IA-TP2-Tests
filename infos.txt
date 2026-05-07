@@ -1,0 +1,5 @@
+Pierre est un développeur Java qui habite à Port-au-Prince.
+Il a un chat qui s'appelle Moustache.
+Pierre travaille chez une entreprise de logiciels depuis 5 ans.
+Son plat préféré est le griot avec du riz collé.
+Il a aussi un chien qui s'appelle Rex.

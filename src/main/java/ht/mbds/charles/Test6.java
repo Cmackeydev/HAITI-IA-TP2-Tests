@@ -1,5 +1,7 @@
 package ht.mbds.charles;
 
+import java.util.Scanner;
+
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.segment.TextSegment;
@@ -56,16 +58,29 @@ public class Test6 {
             .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
             .build();
 
-    // Le LLM va utiliser l'information du fichier infos.txt pour répondre à la question.
-    String question = "Pierre appelle son chat";
-    // L'assistant recherche dans la base vectorielle les informations les plus pertinentes
-    // pour répondre à la question, en comparant les embeddings de la base et celui de la question.
-    // Ces informations sont ajoutées à la question et le tout est envoyé au LLM.
-    String reponse = assistant.chat(question);
-    // Affiche la réponse du LLM.
-    System.out.println(reponse);
+    conversationAvec(assistant);
   }
 
-  
+  private static void conversationAvec(Assistant assistant) {
+   try (Scanner scanner = new Scanner(System.in)) {
+  while (true) {
+    System.out.println("==================================================");
+    System.out.println("Posez votre question : ");
+    String question = scanner.nextLine();
+    if (question.isBlank()) {
+      continue;
+    }
+    System.out.println("==================================================");
+    if ("fin".equalsIgnoreCase(question)) {
+      break;
+    }
+    String reponse = assistant.chat(question);
+    System.out.println("Assistant : " + reponse);
+    System.out.println("==================================================");
+  }
+}
+  }
+
+
 
 }

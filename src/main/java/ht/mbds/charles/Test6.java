@@ -10,6 +10,7 @@ import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.service.AiServices;
+import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
@@ -21,7 +22,7 @@ public class Test6 {
 
   // Assistant conversationnel
   interface Assistant {
-    // Prend un message de l'utilisateur et retourne une réponse du LLM.
+    @SystemMessage("Tu es un assistant concis. Réponds de façon courte et directe, sans explication supplémentaire sauf si on te le demande explicitement.")
     String chat(String userMessage);
   }
 
@@ -41,7 +42,7 @@ public class Test6 {
 .build();
 
     // Chargement du document, sous la forme d'embeddings, dans une base vectorielle en mémoire
-    String nomDocument = "infos.txt";
+    String nomDocument = "langchain4j.pdf";
     Document document = FileSystemDocumentLoader.loadDocument(nomDocument);
     EmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
     // Calcule les embeddings et les enregistre dans la base vectorielle
